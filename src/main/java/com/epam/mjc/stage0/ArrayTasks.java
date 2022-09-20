@@ -132,14 +132,37 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        int outerArrLength = 0;
+
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j].length > arr[j + 1].length) {
+                    // swap arr[j+1] and arr[j]
+                    int[] temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        // arr = [[3, 1, 2,], [3,2]] -> [[3, 2], [3, 1, 2]
+
         for (int i = 0; i < arr.length; i++) {
-            outerArrLength++;
+            int[] innerArr = arr[i];
+            int innerArrLength = innerArr.length;
+
+            for (int x = 0; x < innerArrLength - 1; x++) {
+                for (int y = 0; y < innerArrLength - x - 1; y++) {
+                    if (innerArr[y] > innerArr[y + 1]) {
+                        // swap arr[j+1] and arr[j]
+                        int temp = innerArr[y];
+                        innerArr[y] = innerArr[y + 1];
+                        innerArr[y + 1] = temp;
+                    }
+                }
+            }
         }
 
-        int [][] sortedRaggedArr = new int[outerArrLength][];
 
-        // need to figure out how to sort outer and inner arrays without using any additional packages
-        return sortedRaggedArr;
+        return arr;
     }
 }
